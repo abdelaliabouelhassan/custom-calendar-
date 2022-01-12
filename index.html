@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app" class=" w-full">
+
+        <div class=" flex space-x-2 item-cente">
+            <button @click="next" class=" py-2 px-4 bg-green-400">next</button>
+            {{ displayMonth }}
+            <button @click="back" class=" py-2 px-4 bg-green-400">back</button>
+        </div>
+        <div class=" grid grid-cols-7  p-4 ">
+            <div v-for="(item,index,key) in days" :key="key" :class="{'bg-green-400':item.date == today}"
+                class=" p-2 border h-32" @click="openModal(item.date)">
+                <span v-if="index < 7">{{ weekdays[index] }}</span>
+                <div class=" flex item-center space-x-2">
+                    <span :class="{'text-black':!item.padding,'text-red-200':item.padding}"> {{ item.day }} </span>
+                    <div class=" w-full  flex flex-col item-start overscroll-y-auto space-y-2">
+                        <div v-for="event in events" v-if="event.date == item.date" class=" p-2 bg-yellow-500">
+                            <span>{{ event.title }}</span>
+                        </div>
+                      
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script src="./index.js"></script>
+</body>
+
+</html>
